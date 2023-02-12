@@ -6,9 +6,17 @@ const SpotifyRouter = express.Router();
 
 SpotifyRouter.get("/", async (req, res, next) => {
   try {
-    const result = await Spotify.find();
+    const queryArtist = req.query.artist as string;
 
-    return res.send(result);
+    if (queryArtist === undefined) {
+      const result = await Spotify.find();
+
+      return res.send(result);
+    } else {
+        const result = await Spotify.findById(queryArtist);
+
+        return res.send(result);
+    }
   } catch (e) {
     return next(e);
   }
