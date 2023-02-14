@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const SpotifySchema = new Schema({
+const ArtistsSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -11,5 +11,5 @@ const SpotifySchema = new Schema({
     description: String,
 });
 
-const Spotify = mongoose.model('Spotify', SpotifySchema);
-export default Spotify;
+const Artists = mongoose.model('Artists', ArtistsSchema);
+export default Artists;

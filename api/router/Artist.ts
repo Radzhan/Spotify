@@ -1,12 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
-import Spotify from "../model/spotify";
+import Artists from "../model/Artists";
+import { imagesUpload } from "../multer";
 
-const SpotifyRouter = express.Router();
+const ArtistRouter = express.Router();
 
-SpotifyRouter.get("/", async (req, res, next) => {
+ArtistRouter.get("/", async (req, res, next) => {
   try {
-    const result = await Spotify.find();
+    const result = await Artists.find();
 
     return res.send(result);
   } catch (e) {
@@ -14,13 +15,14 @@ SpotifyRouter.get("/", async (req, res, next) => {
   }
 });
 
-SpotifyRouter.post("/", async (req, res, next) => {
+ArtistRouter.post("/", imagesUpload.single("image"), async (req, res, next) => {
   const urlData = {
     name: req.body.name,
     description: req.body.description,
+    image: req.body.image,
   };
 
-  const NewUrl = new Spotify(urlData);
+  const NewUrl = new Artists(urlData);
 
   try {
     await NewUrl.save();
@@ -34,4 +36,4 @@ SpotifyRouter.post("/", async (req, res, next) => {
   }
 });
 
-export default SpotifyRouter;
+export default ArtistRouter;

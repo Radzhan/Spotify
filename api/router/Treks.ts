@@ -1,20 +1,20 @@
 import express from "express";
 import mongoose from "mongoose";
-import Albums from "../model/Albums";
+import Tracks from "../model/Tracks";
 import { imagesUpload } from "../multer";
 
-const AlbumsRouter = express.Router();
+const TreksRouter = express.Router();
 
-AlbumsRouter.get("/", async (req, res, next) => {
+TreksRouter.get("/", async (req, res, next) => {
   try {
     const queryArtist = req.query.artist as string;
 
     if (queryArtist === undefined) {
-      const result = await Albums.find();
+      const result = await Tracks.find();
 
       return res.send(result);
     } else {
-      const result = await Albums.findById(queryArtist);
+      const result = await Tracks.findById(queryArtist);
 
       return res.send(result);
     }
@@ -23,14 +23,14 @@ AlbumsRouter.get("/", async (req, res, next) => {
   }
 });
 
-AlbumsRouter.post("/", imagesUpload.single("image"), async (req, res, next) => {
+TreksRouter.post("/", imagesUpload.single("image"), async (req, res, next) => {
   const urlData = {
     name: req.body.name,
     description: req.body.description,
     image: req.body.image,
   };
 
-  const NewUrl = new Albums(urlData);
+  const NewUrl = new Tracks(urlData);
 
   try {
     await NewUrl.save();
@@ -44,4 +44,4 @@ AlbumsRouter.post("/", imagesUpload.single("image"), async (req, res, next) => {
   }
 });
 
-export default AlbumsRouter;
+export default TreksRouter;
