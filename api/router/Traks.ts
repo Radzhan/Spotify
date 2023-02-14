@@ -1,20 +1,20 @@
 import express from "express";
 import mongoose from "mongoose";
 import Tracks from "../model/Tracks";
-import { imagesUpload } from "../multer";
+import { TrackMutation } from "../types";
 
 const TreksRouter = express.Router();
 
 TreksRouter.get("/", async (req, res, next) => {
   try {
-    const queryArtist = req.query.artist as string;
+    const queryTrack = req.query.album as string;
 
-    if (queryArtist === undefined) {
+    if (queryTrack === undefined) {
       const result = await Tracks.find();
 
       return res.send(result);
     } else {
-      const result = await Tracks.findById(queryArtist);
+      const result = await Tracks.find({ album: queryTrack });
 
       return res.send(result);
     }
@@ -23,14 +23,14 @@ TreksRouter.get("/", async (req, res, next) => {
   }
 });
 
-TreksRouter.post("/", imagesUpload.single("image"), async (req, res, next) => {
-  const urlData = {
+TreksRouter.post("/", async (req, res, next) => {
+  const trackData: TrackMutation = {
     name: req.body.name,
-    description: req.body.description,
-    image: req.body.image,
+    album: req.body.album,
+    time: req.body.time,
   };
 
-  const NewUrl = new Tracks(urlData);
+  const NewUrl = new Tracks(trackData);
 
   try {
     await NewUrl.save();

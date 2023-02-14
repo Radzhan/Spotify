@@ -4,7 +4,7 @@ const rootPath = __dirname;
 
 const config = {
   rootPath,
-  publicPath: path.join(rootPath, 'public'),
+  publicPath: path.join(rootPath, "public"),
 };
 
 export default config;
