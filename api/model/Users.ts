@@ -1,11 +1,13 @@
 import mongoose, { Model } from "mongoose";
 import bcrypt from "bcrypt";
 import { IUser } from "../types";
+import { randomUUID } from "crypto";
 
 const SALT_WORK_FACTOR = 10;
 
 interface IUserMethods {
   checkPassword(password: string): Promise<boolean>;
+  generateToken(): void;
 }
 
 type UserModel = Model<IUser, {}, IUserMethods>;
@@ -19,6 +21,11 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
   },
 
   password: {
+    type: String,
+    required: true,
+  },
+
+  token: {
     type: String,
     required: true,
   },
@@ -45,6 +52,10 @@ UserSchema.set("toJSON", {
 
 UserSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password);
+};
+
+UserSchema.methods.generateToken = function () {
+  this.token = randomUUID();
 };
 
 const Users = mongoose.model<IUser, UserModel>("Users", UserSchema);
