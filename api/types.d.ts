@@ -14,3 +14,8 @@ export interface TrackMutation {
   album: string;
   time: string;
 }
+
+export interface IUser { 
+  username: string,
+  password: string,
+}
