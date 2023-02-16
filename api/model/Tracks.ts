@@ -19,7 +19,7 @@ const TracksSchema = new Schema({
   },
   time: {
     type: String,
-    required: true
+    required: true,
   },
 });
 
