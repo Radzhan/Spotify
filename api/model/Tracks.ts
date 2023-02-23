@@ -21,6 +21,10 @@ const TracksSchema = new Schema({
     type: String,
     required: true,
   },
+  number: {
+    type: Number,
+    required: true,
+  }
 });
 
 const Tracks = mongoose.model("Tracks", TracksSchema);

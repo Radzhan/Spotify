@@ -6,13 +6,22 @@ export interface ArtistMutation {
 export interface AlbumMutation {
   name: string;
   artists: string;
-  year: string;
+  year: number;
   image: string | null;
+}
+
+export interface AlbumWithNumber {
+  name: string;
+  artists: string;
+  year: number;
+  image: string | undefined;
+  col: number;
 }
 export interface TrackMutation {
   name: string;
   album: string;
   time: string;
+  number: number;
 }
 export interface IUser {
   username: string;
