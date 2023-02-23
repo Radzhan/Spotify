@@ -26,11 +26,11 @@ TrackHistoryRouter.post("/", async (req, res, next) => {
     datetime: datetime,
   };
 
-  const NewUrl = new TrackHistory(TrackHistoryData);
+  const NewTrackHistory = new TrackHistory(TrackHistoryData);
 
   try {
-    await NewUrl.save();
-    return res.send(NewUrl);
+    await NewTrackHistory.save();
+    return res.send(NewTrackHistory);
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.sendStatus(400).send(e);

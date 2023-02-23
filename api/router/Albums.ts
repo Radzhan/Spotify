@@ -70,11 +70,11 @@ AlbumsRouter.post("/", imagesUpload.single("image"), async (req, res, next) => {
     image: req.file ? req.file.filename : null,
   };
 
-  const NewUrl = new Albums(albumData);
+  const NewObject = new Albums(albumData);
 
   try {
-    await NewUrl.save();
-    return res.send(NewUrl);
+    await NewObject.save();
+    return res.send(NewObject);
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.sendStatus(400).send(e);

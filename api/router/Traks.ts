@@ -31,11 +31,11 @@ TreksRouter.post("/", async (req, res, next) => {
     number: req.body.number,
   };
 
-  const NewUrl = new Tracks(trackData);
+  const NewTrack = new Tracks(trackData);
 
   try {
-    await NewUrl.save();
-    return res.send(NewUrl);
+    await NewTrack.save();
+    return res.send(NewTrack);
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.sendStatus(400).send(e);

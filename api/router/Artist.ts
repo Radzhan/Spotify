@@ -23,11 +23,11 @@ ArtistRouter.post("/", imagesUpload.single("image"), async (req, res, next) => {
     image: req.file ? req.file.filename : null,
   };
 
-  const NewUrl = new Artists(artistData);
+  const NewArtist = new Artists(artistData);
 
   try {
-    await NewUrl.save();
-    return res.send(NewUrl);
+    await NewArtist.save();
+    return res.send(NewArtist);
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.sendStatus(400).send(e);
