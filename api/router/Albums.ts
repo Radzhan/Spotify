@@ -12,7 +12,7 @@ AlbumsRouter.get("/", async (req, res, next) => {
     const queryArtist = req.query.artist as string;
 
     if (queryArtist === undefined) {
-      const result = await Albums.find();
+      const result = await Albums.find().sort({ year: -1 });
 
       const array: AlbumWithNumber[] = [];
 
@@ -44,7 +44,9 @@ AlbumsRouter.get("/", async (req, res, next) => {
       }
       return res.send(array);
     } else {
-      const result = await Albums.find({ artists: queryArtist });
+      const result = await Albums.find({ artists: queryArtist }).sort({
+        year: -1,
+      });
       const array: AlbumWithNumber[] = [];
 
       for (let i = 0; i < result.length; i++) {

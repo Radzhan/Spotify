@@ -60,36 +60,6 @@ const run = async () => {
 
   await Tracks.create(
     {
-      album: Завтра._id,
-      name: "Отражение",
-      time: 3.54,
-      number: 1,
-    },
-    {
-      album: Завтра._id,
-      name: "Аня",
-      time: 3.07,
-      number: 2,
-    },
-    {
-      album: Завтра._id,
-      name: "Солнце",
-      time: 3.07,
-      number: 3,
-    },
-    {
-      album: Завтра._id,
-      name: "Назад",
-      time: 3.48,
-      number: 4,
-    },
-    {
-      album: Завтра._id,
-      name: "Лети",
-      time: 3.38,
-      number: 5,
-    },
-    {
       album: TheEminemShow._id,
       name: "Till I Collapse [Clean]",
       time: 4.58,
@@ -152,7 +122,7 @@ const run = async () => {
     {
       album: НавсюпланетуЗемля._id,
       name: "Море, море",
-      time: 3.30,
+      time: 3.3,
       number: 1,
     },
     {
@@ -177,6 +147,36 @@ const run = async () => {
       album: НавсюпланетуЗемля._id,
       name: "Мир",
       time: 2.59,
+      number: 5,
+    },
+    {
+      album: Завтра._id,
+      name: "Отражение",
+      time: 3.54,
+      number: 1,
+    },
+    {
+      album: Завтра._id,
+      name: "Аня",
+      time: 3.07,
+      number: 2,
+    },
+    {
+      album: Завтра._id,
+      name: "Солнце",
+      time: 3.07,
+      number: 3,
+    },
+    {
+      album: Завтра._id,
+      name: "Назад",
+      time: 3.48,
+      number: 4,
+    },
+    {
+      album: Завтра._id,
+      name: "Лети",
+      time: 3.38,
       number: 5,
     }
   );

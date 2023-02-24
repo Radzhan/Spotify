@@ -10,11 +10,13 @@ TreksRouter.get("/", async (req, res, next) => {
     const queryTrack = req.query.album as string;
 
     if (queryTrack === undefined) {
-      const result = await Tracks.find();
+      const result = await Tracks.find().sort({ number: 1 });
 
       return res.send(result);
     } else {
-      const result = await Tracks.find({ album: queryTrack });
+      const result = await Tracks.find({ album: queryTrack }).sort({
+        number: 1,
+      });
 
       return res.send(result);
     }
