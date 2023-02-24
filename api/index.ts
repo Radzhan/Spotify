@@ -20,6 +20,7 @@ app.use("/track_history", TrackHistoryRouter);
 
 const run = async () => {
   mongoose.set("strictQuery", false);
+  app.use(express.static('public'));
   await mongoose.connect("mongodb://localhost/Spotify");
 
   app.listen(port, () => {

@@ -20,6 +20,7 @@ const Main = () => {
         name={element.name}
         image={element.image}
         key={element._id}
+        id={element._id}
       />
     );
   });
