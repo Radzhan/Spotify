@@ -24,7 +24,7 @@ const CardForArtist: React.FC<Props> = ({ id, name, image }) => {
   }
 
   const onCardlick = (id: string) => {
-    navigate('/album/'+ id)
+    navigate("/" + name + "/" + id);
   };
 
   return (

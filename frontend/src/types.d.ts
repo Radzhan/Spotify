@@ -4,10 +4,16 @@ export interface Artists {
   name: string;
 }
 export interface IAlbums {
-  artists: string;
   name: string;
   image: string;
   year: number;
   col: number;
   _id: string;
+}
+
+export interface ITracks {
+  _id: string;
+  name: string;
+  time: string;
+  number: number;
 }

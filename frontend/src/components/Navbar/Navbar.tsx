@@ -16,7 +16,9 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Link component={RouterLink} to="/" variant="body1" color='inherit'>Spotify</Link>
+          <Link component={RouterLink} to="/" variant="body1" color="inherit">
+            Spotify
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

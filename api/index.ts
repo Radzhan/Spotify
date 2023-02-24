@@ -6,6 +6,7 @@ import AlbumsRouter from "./router/Albums";
 import TreksRouter from "./router/Traks";
 import usersRouter from "./router/Users";
 import TrackHistoryRouter from "./router/TrackHistory";
+import config from "./config";
 
 const app = express();
 const port = 8000;
@@ -20,8 +21,8 @@ app.use("/track_history", TrackHistoryRouter);
 
 const run = async () => {
   mongoose.set("strictQuery", false);
-  app.use(express.static('public'));
-  await mongoose.connect("mongodb://localhost/Spotify");
+  app.use(express.static("public"));
+  await mongoose.connect(config.db);
 
   app.listen(port, () => {
     console.log("we are live on " + port);

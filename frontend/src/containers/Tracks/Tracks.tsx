@@ -2,32 +2,29 @@ import { Typography } from "@mui/material";
 import React, { useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import CardForAlbum from "../../components/CardForAlbum/CardForAlbum";
-import { AlbumsArray, getAlbums } from "../../store/spotify";
+import CardForTracks from "../../components/CardForTracks/CardForTracks";
+import { getTracks, TracksArray } from "../../store/spotify";
 
-const Albums = () => {
-  const arrayWithAlbums = useAppSelector(AlbumsArray);
-  const { id, name } = useParams();
+const Tracks = () => {
+  const arrayWithTracks = useAppSelector(TracksArray);
+  const { id, name, author } = useParams();
 
   const dispatch = useAppDispatch();
   const requestAlbum = useCallback(async () => {
-    await dispatch(getAlbums(id!));
+    await dispatch(getTracks(id!));
   }, [dispatch, id]);
 
   useEffect(() => {
     requestAlbum().catch(console.error);
   }, [requestAlbum]);
 
-  const createCard = arrayWithAlbums.map((element, index) => {
+  const createCard = arrayWithTracks.map((element) => {
     return (
-      <CardForAlbum
-        image={element.image}
+      <CardForTracks
         name={element.name}
-        col={element.col}
-        year={element.year}
+        time={element.time}
         key={element._id}
-        id={element._id}
-        author={name!}
+        number={element.number}
       />
     );
   });
@@ -35,13 +32,16 @@ const Albums = () => {
   return createCard.length !== 0 ? (
     <div>
       <Typography gutterBottom variant="h5" component="div">
-        Author: {name}
+        Author: {author}
+        <Typography gutterBottom variant="h6" component="div">
+          Album: {name}
+        </Typography>
       </Typography>
       {createCard}
     </div>
   ) : (
-    <div>No Albums</div>
+    <div>No Tracks</div>
   );
 };
 
-export default Albums;
+export default Tracks;

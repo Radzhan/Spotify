@@ -14,55 +14,63 @@ AlbumsRouter.get("/", async (req, res, next) => {
     if (queryArtist === undefined) {
       const result = await Albums.find();
 
-      const array:AlbumWithNumber[] = [];
+      const array: AlbumWithNumber[] = [];
 
-      for (let i = 0; i < result.length; i++){
-        const getLast = await Tracks.findOne({album: result[i]._id}).sort({number:-1}).limit(1);
+      for (let i = 0; i < result.length; i++) {
+        const getLast = await Tracks.findOne({ album: result[i]._id })
+          .sort({ number: -1 })
+          .limit(1);
         if (getLast) {
           const object = {
+            _id: result[i]._id,
             artists: String(result[i].artists),
             name: result[i].name,
             year: result[i].year,
             image: result[i].image,
             col: getLast.number,
-          }
-          array.push(object)
+          };
+          array.push(object);
         } else {
           const object = {
+            _id: result[i]._id,
             artists: String(result[i].artists),
             name: result[i].name,
             year: result[i].year,
             image: result[i].image,
             col: 0,
-          }
-          array.push(object)
+          };
+          array.push(object);
         }
       }
       return res.send(array);
     } else {
       const result = await Albums.find({ artists: queryArtist });
-      const array:AlbumWithNumber[] = [];
+      const array: AlbumWithNumber[] = [];
 
-      for (let i = 0; i < result.length; i++){
-        const getLast = await Tracks.findOne({album: result[i]._id}).sort({number:-1}).limit(1);
+      for (let i = 0; i < result.length; i++) {
+        const getLast = await Tracks.findOne({ album: result[i]._id })
+          .sort({ number: -1 })
+          .limit(1);
         if (getLast) {
           const object = {
+            _id: result[i]._id,
             artists: String(result[i].artists),
             name: result[i].name,
             year: result[i].year,
             image: result[i].image,
             col: getLast.number,
-          }
-          array.push(object)
+          };
+          array.push(object);
         } else {
           const object = {
+            _id: result[i]._id,
             artists: String(result[i].artists),
             name: result[i].name,
             year: result[i].year,
             image: result[i].image,
             col: 0,
-          }
-          array.push(object)
+          };
+          array.push(object);
         }
       }
       return res.send(array);
