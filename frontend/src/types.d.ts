@@ -21,8 +21,8 @@ export interface ITracks {
 export interface TrackHistory {
   _id: string;
   time: string;
-  name: string | undefined;
-  author: string | undefined;
+  name: string ;
+  author: string;
 }
 
 export interface Product {

@@ -27,8 +27,8 @@ export interface TrackMutation {
 export interface ITracks {
   _id: string;
   time: string;
-  name: string ;
-  author: string;
+  name: string | undefined;
+  author: string | undefined;
 }
 export interface IUser {
   username: string;

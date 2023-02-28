@@ -1,18 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 import axiosApi from "../axiosApi";
-import { Artists, IAlbums, ITracks } from "../types";
+import { Artists, IAlbums, ITracks, TrackHistory } from "../types";
 interface spotifyInterface {
   artists: Artists[];
   albums: IAlbums[];
   tracks: ITracks[];
-  trackHistory: [];
+  trackHistory: TrackHistory[];
 }
 
 const initialState: spotifyInterface = {
   artists: [],
   albums: [],
   tracks: [],
+  trackHistory: [],
 };
 
 export const getArtists = createAsyncThunk<Artists[]>(
@@ -57,10 +58,10 @@ export const postHistory = createAsyncThunk<void, string, { state: RootState }>(
   }
 );
 
-export const getHistory = createAsyncThunk<void, { state: RootState }>(
+export const getHistory = createAsyncThunk<TrackHistory[], void, { state: RootState }>(
   "spotify/getHistory",
-  async (getState) => {
-    const user = getState.state.users.user;
+  async (_, {getState}) => {
+    const user = getState().users.user;
 
     if (user) {
       const request = await axiosApi.get("/track_history", {
@@ -86,6 +87,10 @@ export const spotifySlice = createSlice({
     builder.addCase(getTracks.fulfilled, (state, action) => {
       state.tracks = action.payload;
     });
+
+    builder.addCase(getHistory.fulfilled, (state, action) => {
+      state.trackHistory = action.payload;
+    })
   },
 });
 
@@ -93,3 +98,4 @@ export const spotifyReducer = spotifySlice.reducer;
 export const Atrists = (state: RootState) => state.spotify.artists;
 export const AlbumsArray = (state: RootState) => state.spotify.albums;
 export const TracksArray = (state: RootState) => state.spotify.tracks;
+export const TracksHistoryArray = (state: RootState) => state.spotify.trackHistory;

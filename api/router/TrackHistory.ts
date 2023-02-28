@@ -60,8 +60,8 @@ TrackHistoryRouter.get("/", async (req, res, next) => {
     const array: ITracks[] = [];
 
     for (let i = 0; i < result.length; i++) {
-      const name = await Tracks.findOne({ _id: result[i]._id });
-      const author = await Users.findOne({ _id: result[i]._id });
+      const name = await Tracks.findOne({ _id: result[i].track });
+      const author = await Users.findOne({ _id: result[i].user });
       const object = {
         _id: String(result[i]._id),
         name: name?.name,
@@ -70,7 +70,6 @@ TrackHistoryRouter.get("/", async (req, res, next) => {
       };
       array.push(object);
     }
-
     return res.send(array);
   } catch (e) {
     return next(e);
