@@ -58,20 +58,21 @@ export const postHistory = createAsyncThunk<void, string, { state: RootState }>(
   }
 );
 
-export const getHistory = createAsyncThunk<TrackHistory[], void, { state: RootState }>(
-  "spotify/getHistory",
-  async (_, {getState}) => {
-    const user = getState().users.user;
+export const getHistory = createAsyncThunk<
+  TrackHistory[],
+  void,
+  { state: RootState }
+>("spotify/getHistory", async (_, { getState }) => {
+  const user = getState().users.user;
 
-    if (user) {
-      const request = await axiosApi.get("/track_history", {
-        headers: { Authorization: user.token },
-      });
+  if (user) {
+    const request = await axiosApi.get("/track_history", {
+      headers: { Authorization: user.token },
+    });
 
-      return request.data;
-    }
+    return request.data;
   }
-);
+});
 
 export const spotifySlice = createSlice({
   name: "spotify",
@@ -90,7 +91,7 @@ export const spotifySlice = createSlice({
 
     builder.addCase(getHistory.fulfilled, (state, action) => {
       state.trackHistory = action.payload;
-    })
+    });
   },
 });
 
@@ -98,4 +99,5 @@ export const spotifyReducer = spotifySlice.reducer;
 export const Atrists = (state: RootState) => state.spotify.artists;
 export const AlbumsArray = (state: RootState) => state.spotify.albums;
 export const TracksArray = (state: RootState) => state.spotify.tracks;
-export const TracksHistoryArray = (state: RootState) => state.spotify.trackHistory;
+export const TracksHistoryArray = (state: RootState) =>
+  state.spotify.trackHistory;

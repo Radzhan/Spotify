@@ -3,12 +3,12 @@ import dayjs from "dayjs";
 import React from "react";
 
 interface Props {
-    author: string;
-    time: string;
-    name: string;
+  author: string;
+  time: string;
+  name: string;
 }
 
-const CardForHistory: React.FC<Props>  = ({name, author, time}) => {
+const CardForHistory: React.FC<Props> = ({ name, author, time }) => {
   return (
     <div>
       <Card sx={{ minWidth: 275, my: 3 }}>
@@ -17,7 +17,7 @@ const CardForHistory: React.FC<Props>  = ({name, author, time}) => {
             {author}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {dayjs(time).format('DD/MM/YYYY') }
+            {dayjs(time).format("DD.MM.YYYY HH:mm:ss")}
           </Typography>
           <Typography variant="body2">{name}</Typography>
         </CardContent>

@@ -56,7 +56,9 @@ TrackHistoryRouter.get("/", async (req, res, next) => {
       return res.status(401).send({ error: "Wrong token!" });
     }
 
-    const result = await TrackHistory.find({ user: userFromToken._id });
+    const result = await TrackHistory.find({ user: userFromToken._id }).sort({
+      datetime: -1,
+    });
     const array: ITracks[] = [];
 
     for (let i = 0; i < result.length; i++) {
