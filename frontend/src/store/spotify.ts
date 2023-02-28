@@ -6,6 +6,7 @@ interface spotifyInterface {
   artists: Artists[];
   albums: IAlbums[];
   tracks: ITracks[];
+  trackHistory: [];
 }
 
 const initialState: spotifyInterface = {
@@ -38,6 +39,36 @@ export const getTracks = createAsyncThunk<ITracks[], string>(
     const request = await axiosApi.get("/tracks?album=" + arg);
 
     return request.data;
+  }
+);
+
+export const postHistory = createAsyncThunk<void, string, { state: RootState }>(
+  "spotify/History",
+  async (arg, { getState }) => {
+    const user = getState().users.user;
+
+    if (user) {
+      await axiosApi.post(
+        "/track_history",
+        { track: arg },
+        { headers: { Authorization: user.token } }
+      );
+    }
+  }
+);
+
+export const getHistory = createAsyncThunk<void, { state: RootState }>(
+  "spotify/getHistory",
+  async (getState) => {
+    const user = getState.state.users.user;
+
+    if (user) {
+      const request = await axiosApi.get("/track_history", {
+        headers: { Authorization: user.token },
+      });
+
+      return request.data;
+    }
   }
 );
 

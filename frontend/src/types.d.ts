@@ -18,6 +18,13 @@ export interface ITracks {
   number: number;
 }
 
+export interface TrackHistory {
+  _id: string;
+  time: string;
+  name: string | undefined;
+  author: string | undefined;
+}
+
 export interface Product {
   _id: string;
   title: string;

@@ -23,6 +23,13 @@ export interface TrackMutation {
   time: string;
   number: number;
 }
+
+export interface ITracks {
+  _id: string;
+  time: string;
+  name: string ;
+  author: string;
+}
 export interface IUser {
   username: string;
   password: string;

@@ -1,7 +1,6 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 interface Props {
   image: string;
   name: string;
@@ -27,7 +26,6 @@ const CardForAlbum: React.FC<Props> = ({
   if (image) {
     cardImage = "http://localhost:8000/" + image;
   }
-
   const onCardlick = (id: string) => {
     navigate("/" + name + "/" + author + "/" + id);
   };

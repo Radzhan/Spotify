@@ -1,18 +1,36 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Button, Card, CardContent, Typography } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { selectUser } from "../../features/user/userSlice";
+import { postHistory } from "../../store/spotify";
 
 interface Props {
   name: string;
   time: string;
   number: number;
+  id: string;
 }
 
-const CardForTracks: React.FC<Props> = ({ name, time, number }) => {
+const CardForTracks: React.FC<Props> = ({ id, name, time, number }) => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+
+  const setTrack = async () => {
+    await dispatch(postHistory(id));
+  };
+  if (!user) {
+    return <Navigate to={"/register"} />;
+  }
   return (
     <div>
       <Card
-        sx={{ maxWidth: 345, display: "flex", justifyContent: "space-between" , my: 4}}
+        sx={{
+          maxWidth: 345,
+          display: "flex",
+          justifyContent: "space-between",
+          my: 4,
+        }}
       >
         <Typography gutterBottom variant="h5" component="div">
           {number}
@@ -23,6 +41,9 @@ const CardForTracks: React.FC<Props> = ({ name, time, number }) => {
           </Typography>
           <strong>time: {time}</strong>
         </CardContent>
+        <Button variant="contained" onClick={setTrack}>
+          Play
+        </Button>
       </Card>
     </div>
   );

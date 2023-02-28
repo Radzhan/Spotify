@@ -1,27 +1,33 @@
-import { AppBar, IconButton, Link, Toolbar } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
+import { AppBar, Grid, styled, Toolbar, Typography } from "@mui/material";
+import { Link as NavLink } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
+import { selectUser } from "../../features/user/userSlice";
+import UserMenu from "../UserMenu/UserMenu";
+import AnonMenu from "../AnonMenu/AnonMenu";
+
+const Link = styled(NavLink)({
+  color: "inherit",
+  textDecoration: "none",
+  "&:hover": {
+    color: "inherit",
+  },
+});
 
 const Navbar = () => {
+  const user = useAppSelector(selectUser);
+
   return (
-    <div>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Link component={RouterLink} to="/" variant="body1" color="inherit">
-            Spotify
-          </Link>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="sticky" sx={{ mb: 2 }}>
+      <Toolbar>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Typography variant="h6" component="div">
+            <Link to="/">Spotify</Link>
+          </Typography>
+          <Grid item>{user ? <UserMenu user={user} /> : <AnonMenu />}</Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 };
 

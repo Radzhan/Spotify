@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 const TracksSchema = new Schema({
   album: {
     type: Schema.Types.ObjectId,
-    ref: "Albums",
     required: true,
+    ref: "Albums",
     validate: {
       validator: async (value: Types.ObjectId) => Albums.findById(value),
       message: "Album does not exist",

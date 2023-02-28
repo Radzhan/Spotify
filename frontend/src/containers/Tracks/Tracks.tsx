@@ -24,6 +24,7 @@ const Tracks = () => {
         name={element.name}
         time={element.time}
         key={element._id}
+        id={element._id}
         number={element.number}
       />
     );
