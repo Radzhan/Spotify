@@ -6,6 +6,8 @@ import {PersistGate} from "redux-persist/integration/react";
 import App from "./App";
 import {persistor, store} from "./app/store";
 import {addInterceptors} from "./axiosApi";
+import {ThemeProvider} from "@mui/material";
+import theme from "./theme";
 
 addInterceptors(store);
 
@@ -16,7 +18,9 @@ root.render(
 	<Provider store={store}>
 		<PersistGate persistor={persistor}>
 			<BrowserRouter>
-				<App/>
+				<ThemeProvider theme={theme}>
+					<App />
+				</ThemeProvider>
 			</BrowserRouter>
 		</PersistGate>
 	</Provider>

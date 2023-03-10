@@ -8,15 +8,12 @@ usersRouter.post("/", async (req, res, next) => {
   try {
     const user = new Users({
       username: req.body.username,
-
       password: req.body.password,
     });
 
     user.generateToken();
-
     await user.save();
-
-    return res.send(user);
+    return res.send({ message: "Registered successfully!", user });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(error);

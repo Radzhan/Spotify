@@ -2,6 +2,7 @@ export interface Artists {
   _id: string;
   image: string;
   name: string;
+  isPublished: boolean,
 }
 export interface IAlbums {
   name: string;
@@ -9,6 +10,7 @@ export interface IAlbums {
   year: number;
   col: number;
   _id: string;
+  isPublished: boolean,
 }
 
 export interface ITracks {
@@ -16,36 +18,14 @@ export interface ITracks {
   name: string;
   time: string;
   number: number;
+  isPublished: boolean,
 }
 
 export interface TrackHistory {
   _id: string;
   time: string;
-  name: string ;
+  name: string;
   author: string;
-}
-
-export interface Product {
-  _id: string;
-  title: string;
-  description: string;
-  price: number;
-  image: string | null;
-  category: Category;
-}
-
-export interface ProductMutation {
-  category: string;
-  title: string;
-  description: string;
-  price: string;
-  image: File | null;
-}
-
-export interface Category {
-  _id: string;
-  title: string;
-  description: string;
 }
 
 export interface RegisterMutation {
@@ -57,6 +37,7 @@ export interface User {
   _id: string;
   username: string;
   token: string;
+  role: string;
 }
 
 export interface RegisterResponse {

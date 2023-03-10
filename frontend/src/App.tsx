@@ -16,6 +16,9 @@ function App() {
         <Route path="/:name/:id" element={<Albums />}></Route>
         <Route path="/:name/:author/:id" element={<Tracks />}></Route>
         <Route path="/register" element={<Register />} />
+        <Route path="/addAlbum" element={<p>Album</p>} />
+        <Route path="/addTrack" element={<p>Track</p>} />
+        <Route path="/addArtist" element={<p>artist</p>} />
         <Route path="/login" element={<Login />} />
         <Route path="/trackHistory" element={<TrackHistory />} />
       </Routes>

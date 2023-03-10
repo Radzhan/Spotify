@@ -30,6 +30,7 @@ AlbumsRouter.get("/",  async (req, res, next) => {
             year: result[i].year,
             image: result[i].image,
             col: getLast.number,
+            isPublished: result[i].isPublished,
           };
           array.push(object);
         } else {
@@ -39,6 +40,7 @@ AlbumsRouter.get("/",  async (req, res, next) => {
             name: result[i].name,
             year: result[i].year,
             image: result[i].image,
+            isPublished: result[i].isPublished,
             col: 0,
           };
           array.push(object);
@@ -62,6 +64,7 @@ AlbumsRouter.get("/",  async (req, res, next) => {
             name: result[i].name,
             year: result[i].year,
             image: result[i].image,
+            isPublished: result[i].isPublished,
             col: getLast.number,
           };
           array.push(object);
@@ -72,6 +75,7 @@ AlbumsRouter.get("/",  async (req, res, next) => {
             name: result[i].name,
             year: result[i].year,
             image: result[i].image,
+            isPublished: result[i].isPublished,
             col: 0,
           };
           array.push(object);
@@ -101,7 +105,7 @@ AlbumsRouter.patch("/:id", auth, permit('admin'), async (req, res) => {
 
 AlbumsRouter.get("/:id", async (req, res) => {
   try {
-    const result = await Albums.findById(req.params.id).populate("artists");
+    const result = await Albums.findById(req.params.id);
 
     if (!result) {
       return res.sendStatus(404);
