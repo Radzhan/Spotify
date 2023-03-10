@@ -1,6 +1,8 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {Button, Card, CardContent, CardMedia, Typography} from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import {useAppDispatch} from "../../app/hooks";
+import {deleteAlbum} from "../../store/spotify";
 interface Props {
   image: string;
   name: string;
@@ -8,6 +10,8 @@ interface Props {
   year: number;
   id: string;
   author: string;
+  isAdmin: boolean;
+  onDelete?: () => void;
 }
 
 const CardForAlbum: React.FC<Props> = ({
@@ -17,6 +21,8 @@ const CardForAlbum: React.FC<Props> = ({
   name,
   col,
   year,
+  isAdmin,
+  onDelete,
 }) => {
   const navigate = useNavigate();
 
@@ -29,6 +35,8 @@ const CardForAlbum: React.FC<Props> = ({
   const onCardlick = (id: string) => {
     navigate("/" + name + "/" + author + "/" + id);
   };
+
+
 
   return (
     <div>
@@ -49,6 +57,7 @@ const CardForAlbum: React.FC<Props> = ({
           <strong>Year: {year}</strong>
         </CardContent>
       </Card>
+      { isAdmin ? <Button variant="contained"  onClick={onDelete}>Delete</Button> : null}
     </div>
   );
 };

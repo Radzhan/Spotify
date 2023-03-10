@@ -3,7 +3,7 @@ import React, {useCallback, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import CardForTracks from "../../components/CardForTracks/CardForTracks";
-import {getTracks, TracksArray} from "../../store/spotify";
+import { deleteTrack, getTracks, TracksArray} from "../../store/spotify";
 import {selectUser} from "../../features/user/userSlice";
 
 const Tracks = () => {
@@ -20,11 +20,17 @@ const Tracks = () => {
 		requestAlbum().catch(console.error);
 	}, [requestAlbum]);
 
+	const onDelete = async (num: string) => {
+		await dispatch(deleteTrack(num))
+		await dispatch(getTracks(id!));
+	}
+
 	const createCard = arrayWithTracks.map((element) => {
 		if (user?.role === 'user' || user === null) {
 			if (element.isPublished) {
 				return (
 					<CardForTracks
+						isAdmin={false}
 						name={element.name}
 						time={element.time}
 						key={element._id}
@@ -35,16 +41,17 @@ const Tracks = () => {
 			}
 		} else {
 			return (
-				<>
+				<div key={element._id}>
 					<CardForTracks
-					name={element.name}
-					time={element.time}
-					key={element._id}
-					id={element._id}
-					number={element.number}/>
+						isAdmin={true}
+						onDelete={() => onDelete(element._id)}
+						name={element.name}
+						time={element.time}
+						id={element._id}
+						number={element.number}/>
 					{!element.isPublished ?
-					<p>Не опубликоано</p> : null}
-				</>
+						<p>Не опубликоано</p> : null}
+				</div>
 			);
 		}
 	});

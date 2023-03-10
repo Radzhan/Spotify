@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../app/store";
 import axiosApi from "../axiosApi";
-import {Artists, IAlbums, ITracks, TrackHistory} from "../types";
+import {AlbumMutation, Artists, ArtistsMutaion, IAlbums, ITracks, ITracksMutation, TrackHistory} from "../types";
 
 interface spotifyInterface {
 	artists: Artists[];
@@ -34,6 +34,31 @@ export const getAlbums = createAsyncThunk<IAlbums[], string>(
 		return request.data;
 	}
 );
+
+export const postAlbum = createAsyncThunk<void, AlbumMutation>('spotify/PostAlbum', async (arg) => {
+	await axiosApi.post('albums', arg);
+});
+
+export const postArtist = createAsyncThunk<void, ArtistsMutaion>('spotify/PostArtist', async (arg) => {
+	await axiosApi.post('artists', arg);
+});
+
+export const postTrack = createAsyncThunk<void, ITracksMutation>('spotify/PostTrack', async (arg) => {
+	await axiosApi.post('tracks', arg);
+});
+
+export const deleteAlbum = createAsyncThunk<void, string>('spotify/DeleteAlbum', async (id) => {
+	await axiosApi.delete('albums/' + id)
+});
+
+export const deleteArtist = createAsyncThunk<void, string>('spotify/DeleteArtist', async (id) => {
+	await axiosApi.delete('artist/' + id)
+});
+
+export const deleteTrack = createAsyncThunk<void, string>('spotify/DeleteTrack', async (id) => {
+	await axiosApi.delete('tracks/' + id)
+});
+
 
 export const getTracks = createAsyncThunk<ITracks[], string>(
 	"spotify/tracks",

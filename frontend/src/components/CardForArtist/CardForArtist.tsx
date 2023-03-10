@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -11,9 +12,11 @@ interface Props {
   name: string;
   image: string;
   id: string;
+  isAdmin: boolean;
+  onDelete?: () => void;
 }
 
-const CardForArtist: React.FC<Props> = ({ id, name, image }) => {
+const CardForArtist: React.FC<Props> = ({ id, name, image,onDelete, isAdmin}) => {
   const navigate = useNavigate();
   let cardImage =
     "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAHcAhQMBIgACEQEDEQH/xAAZAAEBAQEBAQAAAAAAAAAAAAAABQcEAwH/xAA1EAEAAgECAgQMBQUAAAAAAAAAAQIDBAUREgYhYdETFBUWQVFUVXSSlLMxNIGRsSM1QmJx/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ANiAAAAAAAAAAAAAAAAkJAAAAAAAAAAAAAAAAAJCQAAAAAHPrtXi0ODw2aLzXmrSIpSbTMzPCIiI/wCg6BN8sYvYty+jv3HlnF7FuX0d+4FITfLOL2Lcvo79x5Zxexbl9HfuBSEyd709eXwmm12OLWrTmyaW9axMzERxmY9cqYAAAAEhIAAAAAm79+V03xmD7lVJN378rp/jMH3KgpCbv29abZNHOfUTzXnqx4onrvPd2s70HTHcsG731uotOXFl6smCJ4Viv+vqmAaD0k3mmx7d41bFOW03ilKceETPXPXP6PvRzeK75t3jVcU4rReaWpM8eEx6p/V60nb9/wBsrbhj1Oky9fC0emP4mEfcOkW09G82DbNNgjkrb+rXD+GGJ9PbPYCr0g/t0fEYPu1UpSd5zYtTtGPNp8lcmLJnwWras9Ux4WqtIAAAAEhIAAAAAi9LtV4ls/jU15/A6jFfl9fC8LTx1ekwa3BODV4qZcUzEzS8cYngDGN23LU7trL6rWX5r26q19FY9UdjjbJ5t7J7r03yHm3snuvTfIDLNp3vX7RGaNFm5IzV4WieuIn0WjthPva17Wve02taeMzaeMzLY/NvZPdem+Q829k916b5AZt0e3fU4cmLbebn02o1OGeW3+Exes8Y/ZryZj6PbNiyUyY9t09b0tFq2inXEx+EqYAAAAEhIAAAAAAAAAAAAAAAABISAAAAAAAAAAAAAAAAASEgAAAAAAAAAAAAAAAAEgA//9k=";
@@ -43,6 +46,7 @@ const CardForArtist: React.FC<Props> = ({ id, name, image }) => {
           </CardContent>
         </CardActionArea>
       </Card>
+      { isAdmin ? <Button variant="contained"  onClick={onDelete}>Delete</Button> : null}
     </div>
   );
 };

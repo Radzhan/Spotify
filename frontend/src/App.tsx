@@ -3,10 +3,11 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Albums from "./containers/Albums/Albums";
 import Main from "./containers/Main/Main";
-import TrackHistory from "./containers/TrackHistory/TrackHistory";
 import Tracks from "./containers/Tracks/Tracks";
-import Login from "./features/user/Login";
 import Register from "./features/user/Register";
+import AddAlbumForm from "./containers/AddAlbumForm/AddAlbumForm";
+import Login from "./features/user/Login";
+import TrackHistory from "./containers/TrackHistory/TrackHistory";
 function App() {
   return (
     <div className="App">
@@ -16,7 +17,7 @@ function App() {
         <Route path="/:name/:id" element={<Albums />}></Route>
         <Route path="/:name/:author/:id" element={<Tracks />}></Route>
         <Route path="/register" element={<Register />} />
-        <Route path="/addAlbum" element={<p>Album</p>} />
+        <Route path="/addAlbum" element={<AddAlbumForm />} />
         <Route path="/addTrack" element={<p>Track</p>} />
         <Route path="/addArtist" element={<p>artist</p>} />
         <Route path="/login" element={<Login />} />

@@ -10,9 +10,11 @@ interface Props {
   time: string;
   number: number;
   id: string;
+  isAdmin: boolean;
+  onDelete?: () => void;
 }
 
-const CardForTracks: React.FC<Props> = ({ id, name, time, number }) => {
+const CardForTracks: React.FC<Props> = ({ id, name, time, number, isAdmin, onDelete, }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
@@ -45,6 +47,7 @@ const CardForTracks: React.FC<Props> = ({ id, name, time, number }) => {
           Play
         </Button>
       </Card>
+	    { isAdmin ? <Button variant="contained"  onClick={onDelete}>Delete</Button> : null}
     </div>
   );
 };

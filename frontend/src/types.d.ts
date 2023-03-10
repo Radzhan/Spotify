@@ -4,6 +4,12 @@ export interface Artists {
   name: string;
   isPublished: boolean,
 }
+
+export interface ArtistsMutaion {
+  image: string;
+  name: string;
+}
+
 export interface IAlbums {
   name: string;
   image: string;
@@ -13,6 +19,13 @@ export interface IAlbums {
   isPublished: boolean,
 }
 
+export interface AlbumMutation {
+  artists: string;
+  name: string;
+  year: string;
+  image: File | null;
+}
+
 export interface ITracks {
   _id: string;
   name: string;
@@ -20,6 +33,13 @@ export interface ITracks {
   number: number;
   isPublished: boolean,
 }
+
+export interface ITracksMutation {
+  name: string;
+  time: string;
+  number: number;
+}
+
 
 export interface TrackHistory {
   _id: string;

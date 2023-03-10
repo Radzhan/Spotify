@@ -3,7 +3,7 @@ import React, {useCallback, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import CardForAlbum from "../../components/CardForAlbum/CardForAlbum";
-import {AlbumsArray, getAlbums} from "../../store/spotify";
+import {AlbumsArray, deleteAlbum, getAlbums} from "../../store/spotify";
 import {selectUser} from "../../features/user/userSlice";
 
 const Albums = () => {
@@ -16,6 +16,11 @@ const Albums = () => {
 		await dispatch(getAlbums(id!));
 	}, [dispatch, id]);
 
+	const onDelete = async (num: string) => {
+		await dispatch(deleteAlbum(num))
+		await dispatch(getAlbums(id!));
+	}
+
 	useEffect(() => {
 		requestAlbum().catch(console.error);
 	}, [requestAlbum]);
@@ -25,6 +30,7 @@ const Albums = () => {
 			if (element.isPublished) {
 				return (
 					<CardForAlbum
+						isAdmin={false}
 						image={element.image}
 						name={element.name}
 						col={element.col}
@@ -37,19 +43,20 @@ const Albums = () => {
 			}
 		} else {
 			return (
-				<>
+				<div key={element._id}>
 					<CardForAlbum
+						onDelete={() => onDelete(element._id)}
+						isAdmin={true}
 						image={element.image}
 						name={element.name}
 						col={element.col}
 						year={element.year}
-						key={element._id}
 						id={element._id}
 						author={name!}
 					/>
 					{!element.isPublished ?
 						<p>Не опубликоано</p> : null}
-				</>
+				</div>
 			);
 		}
 
