@@ -6,8 +6,8 @@ export interface Artists {
 }
 
 export interface ArtistsMutaion {
-  image: string;
-  name: string;
+  image: File | null;
+  name:  string;
 }
 
 export interface IAlbums {

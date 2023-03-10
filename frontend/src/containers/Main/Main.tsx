@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import CardForArtist from "../../components/CardForArtist/CardForArtist";
-import {Atrists, deleteAlbum, getAlbums, getArtists} from "../../store/spotify";
+import {Atrists, deleteArtist, getArtists} from "../../store/spotify";
 import {selectUser} from "../../features/user/userSlice";
 
 const Main = () => {
@@ -17,7 +17,7 @@ const Main = () => {
 	}, [requestArtist]);
 
 	const onDelete = async (num: string) => {
-		await dispatch(deleteAlbum(num))
+		await dispatch(deleteArtist(num))
 		await dispatch(getArtists());
 	}
 

@@ -8,6 +8,7 @@ import Register from "./features/user/Register";
 import AddAlbumForm from "./containers/AddAlbumForm/AddAlbumForm";
 import Login from "./features/user/Login";
 import TrackHistory from "./containers/TrackHistory/TrackHistory";
+import AddArtistForm from "./containers/AddArtistForm/AddArtistForm";
 function App() {
   return (
     <div className="App">
@@ -18,8 +19,8 @@ function App() {
         <Route path="/:name/:author/:id" element={<Tracks />}></Route>
         <Route path="/register" element={<Register />} />
         <Route path="/addAlbum" element={<AddAlbumForm />} />
-        <Route path="/addTrack" element={<p>Track</p>} />
-        <Route path="/addArtist" element={<p>artist</p>} />
+        <Route path="/addTrack" element={<AddArtistForm/>} />
+        <Route path="/addArtist" element={<AddArtistForm/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/trackHistory" element={<TrackHistory />} />
       </Routes>
