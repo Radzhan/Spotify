@@ -1,6 +1,6 @@
 import mongoose, { HydratedDocument, Model } from "mongoose";
-import bcrypt from "bcrypt";
 import { IUser } from "../types";
+import bcrypt from "bcrypt"
 import { randomUUID } from "crypto";
 
 const SALT_WORK_FACTOR = 10;
@@ -42,6 +42,13 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     type: String,
     required: true,
   },
+
+  role: {
+    type: String,
+    required: true,
+    default: 'user',
+    enum: ['user', 'admin']
+  }
 });
 
 UserSchema.pre("save", async function (next) {
