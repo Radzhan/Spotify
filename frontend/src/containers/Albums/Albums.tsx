@@ -1,9 +1,9 @@
-import {Typography} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import React, {useCallback, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import CardForAlbum from "../../components/CardForAlbum/CardForAlbum";
-import {AlbumsArray, deleteAlbum, getAlbums} from "../../store/spotify";
+import {AlbumsArray, changePublishAlbum, deleteAlbum, getAlbums} from "../../store/spotify";
 import {selectUser} from "../../features/user/userSlice";
 
 const Albums = () => {
@@ -17,15 +17,20 @@ const Albums = () => {
 	}, [dispatch, id]);
 
 	const onDelete = async (num: string) => {
-		await dispatch(deleteAlbum(num))
+		await dispatch(deleteAlbum(num));
 		await dispatch(getAlbums(id!));
-	}
+	};
+
+	const changeTo = async (arg: string) => {
+		await dispatch(changePublishAlbum(arg));
+		await dispatch(getAlbums(id!));
+	};
 
 	useEffect(() => {
 		requestAlbum().catch(console.error);
 	}, [requestAlbum]);
 
-	const createCard = arrayWithAlbums.map((element, index) => {
+	const createCard = arrayWithAlbums.map((element) => {
 		if (user?.role === 'user' || user === null) {
 			if (element.isPublished) {
 				return (
@@ -55,7 +60,10 @@ const Albums = () => {
 						author={name!}
 					/>
 					{!element.isPublished ?
-						<p>Не опубликоано</p> : null}
+						<div>
+							<p>Не опубликоано</p>
+							<Button variant="contained" onClick={() => changeTo(element._id)}>Publicate</Button>
+						</div>  : null}
 				</div>
 			);
 		}

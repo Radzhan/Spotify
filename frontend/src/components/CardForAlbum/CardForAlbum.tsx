@@ -1,8 +1,7 @@
 import {Button, Card, CardContent, CardMedia, Typography} from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {useAppDispatch} from "../../app/hooks";
-import {deleteAlbum} from "../../store/spotify";
+
 interface Props {
   image: string;
   name: string;
@@ -35,8 +34,6 @@ const CardForAlbum: React.FC<Props> = ({
   const onCardlick = (id: string) => {
     navigate("/" + name + "/" + author + "/" + id);
   };
-
-
 
   return (
     <div>

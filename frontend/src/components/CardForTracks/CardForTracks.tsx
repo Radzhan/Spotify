@@ -21,9 +21,11 @@ const CardForTracks: React.FC<Props> = ({ id, name, time, number, isAdmin, onDel
   const setTrack = async () => {
     await dispatch(postHistory(id));
   };
+
   if (!user) {
     return <Navigate to={"/register"} />;
   }
+
   return (
     <div>
       <Card

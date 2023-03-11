@@ -50,17 +50,26 @@ export const postTrack = createAsyncThunk<void, ITracksMutation>('spotify/PostTr
 });
 
 export const deleteAlbum = createAsyncThunk<void, string>('spotify/DeleteAlbum', async (id) => {
-	await axiosApi.delete('albums/' + id)
+	await axiosApi.delete('albums/' + id);
 });
 
 export const deleteArtist = createAsyncThunk<void, string>('spotify/DeleteArtist', async (id) => {
-	await axiosApi.delete('artists/' + id)
+	await axiosApi.delete('artists/' + id);
 });
 
 export const deleteTrack = createAsyncThunk<void, string>('spotify/DeleteTrack', async (id) => {
-	await axiosApi.delete('tracks/' + id)
+	await axiosApi.delete('tracks/' + id);
 });
 
+export const changePublishAlbum = createAsyncThunk<void, string>('spotify,changeAlbum', async (arg) => {
+	await axiosApi.patch('/albums/' + arg + '/togglePublished');
+});
+export const changePublishArtist = createAsyncThunk<void, string>('spotify,changeArtist', async (arg) => {
+	await axiosApi.patch('/artists/' + arg + '/togglePublished');
+});
+export const changePublishTrack = createAsyncThunk<void, string>('spotify,changeTrack', async (arg) => {
+	await axiosApi.patch('/tracks/' + arg + '/togglePublished');
+});
 
 export const getTracks = createAsyncThunk<ITracks[], string>(
 	"spotify/tracks",
@@ -91,10 +100,10 @@ export const getHistory = createAsyncThunk<TrackHistory[],
 });
 
 export const getAlbumFrom = createAsyncThunk<IAlbums[], string>('spotify/AlmumFromOne', async (arg) => {
-	const response = await axiosApi.get('albums?artist=' + arg)
+	const response = await axiosApi.get('albums?artist=' + arg);
 
-	return response.data
-})
+	return response.data;
+});
 
 export const spotifySlice = createSlice({
 	name: "spotify",
@@ -112,7 +121,7 @@ export const spotifySlice = createSlice({
 		});
 		builder.addCase(getAlbumFrom.fulfilled, (state, action) => {
 			state.albumsFrom = action.payload;
-		})
+		});
 		builder.addCase(getHistory.fulfilled, (state, action) => {
 			state.trackHistory = action.payload;
 		});

@@ -1,9 +1,9 @@
-import {Typography} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import React, {useCallback, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import CardForTracks from "../../components/CardForTracks/CardForTracks";
-import { deleteTrack, getTracks, TracksArray} from "../../store/spotify";
+import { changePublishTrack, deleteTrack, getTracks, TracksArray} from "../../store/spotify";
 import {selectUser} from "../../features/user/userSlice";
 
 const Tracks = () => {
@@ -21,9 +21,14 @@ const Tracks = () => {
 	}, [requestAlbum]);
 
 	const onDelete = async (num: string) => {
-		await dispatch(deleteTrack(num))
+		await dispatch(deleteTrack(num));
 		await dispatch(getTracks(id!));
-	}
+	};
+
+	const changeTo = async (arg: string) => {
+		await dispatch(changePublishTrack(arg));
+		await dispatch(getTracks(id!));
+	};
 
 	const createCard = arrayWithTracks.map((element) => {
 		if (user?.role === 'user' || user === null) {
@@ -50,7 +55,10 @@ const Tracks = () => {
 						id={element._id}
 						number={element.number}/>
 					{!element.isPublished ?
-						<p>Не опубликоано</p> : null}
+						<div>
+							<p>Не опубликоано</p>
+							<Button variant="contained" onClick={() => changeTo(element._id)}>Publicate</Button>
+						</div> : null}
 				</div>
 			);
 		}

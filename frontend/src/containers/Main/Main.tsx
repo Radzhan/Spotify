@@ -1,13 +1,15 @@
 import React, {useCallback, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import CardForArtist from "../../components/CardForArtist/CardForArtist";
-import {Atrists, deleteArtist, getArtists} from "../../store/spotify";
+import {Atrists, changePublishArtist, deleteArtist, getArtists} from "../../store/spotify";
 import {selectUser} from "../../features/user/userSlice";
+import {Button} from "@mui/material";
 
 const Main = () => {
 	const arrayWithArtists = useAppSelector(Atrists);
 	const user = useAppSelector(selectUser);
 	const dispatch = useAppDispatch();
+
 	const requestArtist = useCallback(async () => {
 		await dispatch(getArtists());
 	}, [dispatch]);
@@ -17,9 +19,14 @@ const Main = () => {
 	}, [requestArtist]);
 
 	const onDelete = async (num: string) => {
-		await dispatch(deleteArtist(num))
+		await dispatch(deleteArtist(num));
 		await dispatch(getArtists());
-	}
+	};
+
+	const changeTo = async (arg: string) => {
+		await dispatch(changePublishArtist(arg));
+		await dispatch(getArtists());
+	};
 
 	const createCard = arrayWithArtists.map((element) => {
 		if (user?.role === 'user' || user === null) {
@@ -45,7 +52,10 @@ const Main = () => {
 						id={element._id}
 					/>
 					{!element.isPublished ?
-						<p>Не опубликоано</p> : null}
+						<div>
+							<p>Не опубликоано</p>
+							<Button variant="contained" onClick={() => changeTo(element._id)}>Publicate</Button>
+						</div> : null}
 				</div>
 			);
 		}

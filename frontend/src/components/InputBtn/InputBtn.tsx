@@ -1,12 +1,13 @@
-import React, { useRef, useState } from "react";
-import { Button, Grid, TextField } from "@mui/material";
+import React, {useRef, useState} from "react";
+import {Button, Grid, TextField} from "@mui/material";
+
 interface Props {
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	name: string;
 	label: string;
 }
 
-const InputBtn: React.FC<Props> = ({ onChange, name, label }) => {
+const InputBtn: React.FC<Props> = ({onChange, name, label}) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const [filename, setFilename] = useState("");
@@ -30,7 +31,7 @@ const InputBtn: React.FC<Props> = ({ onChange, name, label }) => {
 	return (
 		<>
 			<input
-				style={{ display: "none" }}
+				style={{display: "none"}}
 				type="file"
 				name={name}
 				onChange={onFileChange}
@@ -46,11 +47,13 @@ const InputBtn: React.FC<Props> = ({ onChange, name, label }) => {
 						onClick={activateInput}
 					/>
 				</Grid>
+
 				<Grid item>
 					<Button variant="contained" type="button" onClick={activateInput}>
 						Browse
 					</Button>
 				</Grid>
+
 			</Grid>
 		</>
 	);
