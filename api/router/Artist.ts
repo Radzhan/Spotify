@@ -35,7 +35,7 @@ ArtistRouter.post("/", auth, imagesUpload.single("image"), async (req, res, next
 	}
 });
 
-ArtistRouter.patch("/:id", auth, permit('admin'), async (req, res) => {
+ArtistRouter.patch("/:id/togglePublished", auth, permit('admin'), async (req, res) => {
 	try {
 		const request = await Artists.findById({ _id: req.params.id });
 

@@ -88,7 +88,7 @@ AlbumsRouter.get("/",  async (req, res, next) => {
   }
 });
 
-AlbumsRouter.patch("/:id", auth, permit('admin'), async (req, res) => {
+AlbumsRouter.patch("/:id/togglePublished", auth, permit('admin'), async (req, res) => {
   try {
     const request = await Albums.findById({ _id: req.params.id });
 

@@ -27,7 +27,7 @@ TreksRouter.get("/", async (req, res, next) => {
 });
 
 
-TreksRouter.patch("/:id", auth, permit('admin'), async (req, res) => {
+TreksRouter.patch("/:id/togglePublished", auth, permit('admin'), async (req, res) => {
 	try {
 		const request = await Tracks.findById({ _id: req.params.id });
 

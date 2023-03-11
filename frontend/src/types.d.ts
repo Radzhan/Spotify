@@ -35,6 +35,7 @@ export interface ITracks {
 }
 
 export interface ITracksMutation {
+  album: string;
   name: string;
   time: string;
   number: number;

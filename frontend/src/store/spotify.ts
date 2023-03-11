@@ -6,12 +6,14 @@ import {AlbumMutation, Artists, ArtistsMutaion, IAlbums, ITracks, ITracksMutatio
 interface spotifyInterface {
 	artists: Artists[];
 	albums: IAlbums[];
+	albumsFrom: IAlbums[];
 	tracks: ITracks[];
 	trackHistory: TrackHistory[];
 }
 
 const initialState: spotifyInterface = {
 	artists: [],
+	albumsFrom: [],
 	albums: [],
 	tracks: [],
 	trackHistory: [],
@@ -52,7 +54,7 @@ export const deleteAlbum = createAsyncThunk<void, string>('spotify/DeleteAlbum',
 });
 
 export const deleteArtist = createAsyncThunk<void, string>('spotify/DeleteArtist', async (id) => {
-	await axiosApi.delete('artist/' + id)
+	await axiosApi.delete('artists/' + id)
 });
 
 export const deleteTrack = createAsyncThunk<void, string>('spotify/DeleteTrack', async (id) => {
@@ -88,6 +90,12 @@ export const getHistory = createAsyncThunk<TrackHistory[],
 	return request.data;
 });
 
+export const getAlbumFrom = createAsyncThunk<IAlbums[], string>('spotify/AlmumFromOne', async (arg) => {
+	const response = await axiosApi.get('albums?artist=' + arg)
+
+	return response.data
+})
+
 export const spotifySlice = createSlice({
 	name: "spotify",
 	initialState,
@@ -102,7 +110,9 @@ export const spotifySlice = createSlice({
 		builder.addCase(getTracks.fulfilled, (state, action) => {
 			state.tracks = action.payload;
 		});
-
+		builder.addCase(getAlbumFrom.fulfilled, (state, action) => {
+			state.albumsFrom = action.payload;
+		})
 		builder.addCase(getHistory.fulfilled, (state, action) => {
 			state.trackHistory = action.payload;
 		});
@@ -113,5 +123,6 @@ export const spotifyReducer = spotifySlice.reducer;
 export const Atrists = (state: RootState) => state.spotify.artists;
 export const AlbumsArray = (state: RootState) => state.spotify.albums;
 export const TracksArray = (state: RootState) => state.spotify.tracks;
+export const AlbumsArrayFrom = (state: RootState) => state.spotify.albumsFrom;
 export const TracksHistoryArray = (state: RootState) =>
 	state.spotify.trackHistory;

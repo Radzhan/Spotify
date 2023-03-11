@@ -9,6 +9,7 @@ import AddAlbumForm from "./containers/AddAlbumForm/AddAlbumForm";
 import Login from "./features/user/Login";
 import TrackHistory from "./containers/TrackHistory/TrackHistory";
 import AddArtistForm from "./containers/AddArtistForm/AddArtistForm";
+import AddTrackForm from "./containers/AddTrackForm/AddTrackForm";
 function App() {
   return (
     <div className="App">
@@ -19,7 +20,7 @@ function App() {
         <Route path="/:name/:author/:id" element={<Tracks />}></Route>
         <Route path="/register" element={<Register />} />
         <Route path="/addAlbum" element={<AddAlbumForm />} />
-        <Route path="/addTrack" element={<AddArtistForm/>} />
+        <Route path="/addTrack" element={<AddTrackForm/>} />
         <Route path="/addArtist" element={<AddArtistForm/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/trackHistory" element={<TrackHistory />} />
