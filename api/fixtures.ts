@@ -4,7 +4,7 @@ import Albums from "./model/Albums";
 import Artists from "./model/Artists";
 import Tracks from "./model/Tracks";
 import Users from "./model/Users";
-import {randomUUID} from "crypto";
+import * as crypto from 'crypto';
 
 const run = async () => {
 	await mongoose.connect(config.db);
@@ -14,6 +14,7 @@ const run = async () => {
 		await db.dropCollection("artists");
 		await db.dropCollection("albums");
 		await db.dropCollection("tracks");
+		await db.dropCollection('users');
 	} catch (e) {
 		console.log("Collections were not present, skipping drop...");
 	}
@@ -23,13 +24,15 @@ const run = async () => {
 			username: 'Sasha',
 			password: '12345',
 			role: 'user',
-			token: randomUUID(),
+			token: crypto.randomUUID(),
+			displayName: 'Sany',
 		},
 		{
-			username: 'Beka',
+			username: 'Bermet',
 			password: 'qwerty',
 			role: 'admin',
-			token: randomUUID(),
+			token: crypto.randomUUID(),
+			displayName: 'Beka',
 		}
 	)
 
