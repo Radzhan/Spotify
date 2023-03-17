@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import ArtistRouter from "./router/Artist";
-import AlbumsRouter from "./router/Albums";
-import TreksRouter from "./router/Traks";
-import usersRouter from "./router/Users";
-import TrackHistoryRouter from "./router/TrackHistory";
+import ArtistRouter from "./router/artist";
+import AlbumsRouter from "./router/albums";
+import TreksRouter from "./router/traks";
+import usersRouter from "./router/users";
+import TrackHistoryRouter from "./router/trackHistory";
 import config from "./config";
 
 const app = express();

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Button, Menu, MenuItem } from "@mui/material";
+import {Avatar, Button, Menu, MenuItem} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../types";
 import {useAppDispatch} from "../../app/hooks";
 import {logout} from "../../features/user/userThunks";
+import {apiURL} from "../../constants";
 
 interface Props {
   user: User;
@@ -34,10 +35,19 @@ const UserMenu: React.FC<Props> = ({ user }) => {
     navigate('/add' + arg)
   }
 
+  let cardImage =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png";
+
+  if (user.googleId && user.avatar) {
+    cardImage = user.avatar;
+  } else if (!user.googleId) {
+    cardImage = apiURL + '/' + user.avatar;
+  }
+
   return (
     <>
       <Button onClick={handleClick} color="inherit">
-        Hello, {user.displayName}
+        <Avatar sx={{mx: 1}} alt={user.displayName} src={cardImage} />{user.displayName}
       </Button>
       <Menu
         anchorEl={anchorEl}
