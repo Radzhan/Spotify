@@ -1,7 +1,7 @@
-import mongoose, { HydratedDocument, Model } from "mongoose";
-import { IUser } from "../types";
+import mongoose, {HydratedDocument, Model} from "mongoose";
+import {IUser} from "../types";
 import bcrypt from "bcrypt"
-import { randomUUID } from "crypto";
+import {randomUUID} from "crypto";
 
 const SALT_WORK_FACTOR = 10;
 
@@ -48,16 +48,20 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     required: true,
     default: 'user',
     enum: ['user', 'admin']
-  }
+  },
+  displayName: {
+    type: String,
+    required: true,
+  },
+  googleId: String,
+  avatar: String,
 });
 
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
-  const hash = await bcrypt.hash(this.password, salt);
-
-  this.password = hash;
+  this.password = await bcrypt.hash(this.password, salt);
 
   next();
 });
