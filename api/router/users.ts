@@ -18,6 +18,7 @@ usersRouter.post("/",  imagesUpload.single("image"), async (req, res, next) => {
       avatar: req.file ? req.file.filename : null,
     });
 
+
     user.generateToken();
     await user.save();
     return res.send({ message: "Registered successfully!", user });

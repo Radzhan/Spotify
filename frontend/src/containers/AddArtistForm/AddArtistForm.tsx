@@ -14,9 +14,9 @@ const AddArtistForm = () => {
 		image: null,
 	});
 
-	const submitFormHandler = (e: React.FormEvent) => {
+	const submitFormHandler = async (e: React.FormEvent) => {
 		e.preventDefault();
-		dispatch(postArtist(state));
+		await dispatch(postArtist(state));
 		navigate('/');
 	};
 

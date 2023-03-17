@@ -16,9 +16,9 @@ const AddAlbumForm = () => {
 		image: null,
 	});
 
-	const submitFormHandler = (e: React.FormEvent) => {
+	const submitFormHandler = async (e: React.FormEvent) => {
 		e.preventDefault();
-		dispatch(postAlbum(state));
+		await dispatch(postAlbum(state));
 		navigate('/');
 	};
 

@@ -30,8 +30,6 @@ const Register = () => {
     avatar: null,
   });
 
-  console.log(state);
-
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setState((prevState: any) => ({ ...prevState, [name]: value }));
@@ -134,7 +132,7 @@ const Register = () => {
             </Grid>
             <Grid item xs>
               <InputBtn
-                label="avatar"
+                label="Avatar"
                 onChange={fileInputChangeHandler}
                 name="avatar"
               />

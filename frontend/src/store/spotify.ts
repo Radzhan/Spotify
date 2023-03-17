@@ -39,10 +39,13 @@ export const getAlbums = createAsyncThunk<IAlbums[], string>(
 
 export const postAlbum = createAsyncThunk<void, AlbumMutation>('spotify/PostAlbum', async (arg) => {
 	await axiosApi.post('albums', arg);
+
 });
 
 export const postArtist = createAsyncThunk<void, ArtistsMutaion>('spotify/PostArtist', async (arg) => {
 	await axiosApi.post('artists', arg);
+	console.log(arg)
+
 });
 
 export const postTrack = createAsyncThunk<void, ITracksMutation>('spotify/PostTrack', async (arg) => {
